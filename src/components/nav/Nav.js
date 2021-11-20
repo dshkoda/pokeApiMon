@@ -28,7 +28,7 @@ export const Nav = () => {
                     style={{display: state.isOpen ? 'block': 'none'}}
                 >
                     <ul>
-                        <li><NavLink to='/'>Главная</NavLink></li>
+                        <li onClick={state.hideNavHandler} ><NavLink to='/'>Главная</NavLink></li>
                     </ul>
 
                     <List/>

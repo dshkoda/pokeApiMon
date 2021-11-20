@@ -9,6 +9,7 @@ import {Card} from '../card/Card'
 export const Home = () =>{
 
     const {state} = useContext(MainContext)
+    const url = 'https://pokeapi.co/api/v2/pokemon/'
 
     return(
         <div className = 'home'>
@@ -19,6 +20,8 @@ export const Home = () =>{
                         <Card 
                             name = {state.pokemons[pokemon].name}
                             img = {state.images[state.pokemons[pokemon].name]}
+                            click = {state.getItem}
+                            arg = {`${url}${index + 1}`}
                         />
                       </Link>          
                     )

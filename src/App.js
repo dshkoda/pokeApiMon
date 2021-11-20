@@ -3,15 +3,17 @@ import './app.scss';
 import {connect} from 'react-redux';
 import { Layout } from './components/layout/Layout';
 import { MainContext } from './components/context/MainContext';
-import { hideNav, showNav } from './redux/actionCreators/nav'
-import { getApi } from './redux/actionCreators/main';
+import { showNav, hideNav } from './redux/actionCreators/nav';
+import { getPokemons } from './redux/actionCreators/main';
 import { getImages } from './redux/actionCreators/images';
+import { getItem } from './redux/actionCreators/item';
+
 
 class App extends React.Component {
 
 
-  componentDidCatch(){
-    this.props.getApi()
+  componentDidMount(){
+    this.props.getPokemons()
     this.props.getImages()
   }
 
@@ -19,7 +21,7 @@ class App extends React.Component {
 
 
     return(
-      <MainContext.Provider value = {{state: this.props }}>
+      <MainContext.Provider value = {{state: this.props}}>
         <Layout />
       </MainContext.Provider>
       
@@ -31,9 +33,15 @@ class App extends React.Component {
 function mapStateToProps(state){
   return{
     isOpen: state.nav.isOpen,
-    api: state.main.api,
+    pokemons: state.main.pokemons,
     loading: state.main.loading,
-    images: state.images.images
+    images: state.images.images,
+    name: state.item.name,
+    height: state.item.height,
+    weight: state.item.weight,
+    types: state.item.types,
+    abilities: state.item.abilities,
+    itemLoading: state.item.itemLoading
   }
 }
 
@@ -41,8 +49,9 @@ function mapDispatchToProps(dispatch){
   return{
     showNavHadler: ()=> dispatch(showNav()),
     hideNavHandler: ()=> dispatch(hideNav()),
-    getApi: ()=> dispatch(getApi()),
-    getImages: ()=> dispatch(getImages())
+    getPokemons: ()=> dispatch(getPokemons()),
+    getImages: ()=> dispatch(getImages()),
+    getItem: (url)=> dispatch(getItem(url))
   }
 }
 

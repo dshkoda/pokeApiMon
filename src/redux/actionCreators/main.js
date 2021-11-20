@@ -1,6 +1,6 @@
 import { FETCH_POKEMONS, LOAD } from "../actionTypes";
 
-export function getApi(){
+export function getPokemons(){
     return async (dispatch) => {
         await fetch('https://pokeapi.co/api/v2/pokemon/')
         .then((response)=> response.json()

@@ -4,11 +4,14 @@ import { MainContext } from "../context/MainContext";
 
 
 export const List = () => {
-
     const {state} = useContext(MainContext)
-    const descHandler = () =>{
+    const url = 'https://pokeapi.co/api/v2/pokemon/'
+  
+    const descrHandler = (url) =>{
+        state.getItem(url)
         state.hideNavHandler()
     }
+
 
     return(
         <div>
@@ -16,7 +19,7 @@ export const List = () => {
             <ul>
                 { Object.keys(state.pokemons).map((pokemon, i)=>{
                     return(
-                        <li onClick={()=>descHandler()}
+                        <li onClick={()=>descrHandler(`${url}${i + 1}`)} key = {i}
                         >
                             <NavLink to={`/item/${state.pokemons[pokemon].name}`}>
                                 {state.pokemons[pokemon].name}
